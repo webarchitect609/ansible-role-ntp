@@ -1,6 +1,14 @@
+## Attention!
+
+This is a fork from [geerlingguy.ansible-role-ntp](https://github.com/geerlingguy/ansible-role-ntp) role
+with [issue #85 "NTP keeps soliciting with the Pool Servers"](https://github.com/geerlingguy/ansible-role-ntp/issues/85)
+fixed using [PR #84 "allow pool associations"](https://github.com/geerlingguy/ansible-role-ntp/pull/84). Please, feel
+free to use this role if you cannot wait for corresponding PR to be merged. I will mark this role as deprecated when the
+original role is fixed, but nobody knows when it will be.
+
 # Ansible Role: NTP
 
-[![CI](https://github.com/geerlingguy/ansible-role-ntp/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-ntp/actions?query=workflow%3ACI)
+[![CI](https://github.com/webarchitect609/ansible-role-ntp/workflows/CI/badge.svg?event=push)](https://github.com/webarchitect609/ansible-role-ntp/actions?query=workflow%3ACI)
 
 Installs NTP on Linux.
 
@@ -14,7 +22,9 @@ Available variables are listed below, along with default values (see `defaults/m
 
     ntp_enabled: true
 
-Whether to start the ntpd service and enable it at system boot. On many virtual machines that run inside a container (like OpenVZ or VirtualBox), it's recommended you don't run the NTP daemon, since the host itself should be set to synchronize time for all its child VMs.
+Whether to start the ntpd service and enable it at system boot. On many virtual machines that run inside a container (
+like OpenVZ or VirtualBox), it's recommended you don't run the NTP daemon, since the host itself should be set to
+synchronize time for all its child VMs.
 
     ntp_timezone: Etc/UTC
 
@@ -22,15 +32,18 @@ Set the timezone for your server.
 
     ntp_package: ntp
 
-The package to install which provides NTP functionality. The default is `ntp` for most platforms, or `chrony` on RHEL/CentOS 7 and later.
+The package to install which provides NTP functionality. The default is `ntp` for most platforms, or `chrony` on
+RHEL/CentOS 7 and later.
 
     ntp_daemon: [various]
 
-The default NTP daemon should be correct for your distribution, but there are some cases where you may want to override the default, e.g. if you're running `ntp` on newer versions of RHEL/CentOS.
+The default NTP daemon should be correct for your distribution, but there are some cases where you may want to override
+the default, e.g. if you're running `ntp` on newer versions of RHEL/CentOS.
 
     ntp_config_file: /etc/ntp.conf
 
-The path to the NTP configuration file. The default is `/etc/ntp.conf` for most platforms, or `/etc/chrony.conf` on RHEL/CentOS 7 and later.
+The path to the NTP configuration file. The default is `/etc/ntp.conf` for most platforms, or `/etc/chrony.conf` on
+RHEL/CentOS 7 and later.
 
     ntp_manage_config: false
 
@@ -38,11 +51,13 @@ Set to true to allow this role to manage the NTP configuration file (`/etc/ntp.c
 
     ntp_driftfile: [various]
 
-The default NTP driftfile should be correct for your distribution, but there are some cases where you may want to override the default.
+The default NTP driftfile should be correct for your distribution, but there are some cases where you may want to
+override the default.
 
     ntp_area: ''
 
-Set the [NTP Pool Area](http://support.ntp.org/bin/view/Servers/NTPPoolServers) to use. Defaults to none, which uses the worldwide pool.
+Set the [NTP Pool Area](http://support.ntp.org/bin/view/Servers/NTPPoolServers) to use. Defaults to none, which uses the
+worldwide pool.
 
     ntp_servers:
       - "0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
@@ -50,7 +65,8 @@ Set the [NTP Pool Area](http://support.ntp.org/bin/view/Servers/NTPPoolServers) 
       - "2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
       - "3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
 
-Specify the NTP servers you'd like to use. Only takes effect if you allow this role to manage NTP's configuration, by setting `ntp_manage_config` to `True`.
+Specify the NTP servers you'd like to use. Only takes effect if you allow this role to manage NTP's configuration, by
+setting `ntp_manage_config` to `True`.
 
     ntp_restrict:
       - "127.0.0.1"
@@ -74,7 +90,7 @@ None.
 
     - hosts: all
       roles:
-        - geerlingguy.ntp
+        - webarchitect609.ntp
 
 *Inside `vars/main.yml`*:
 
@@ -86,4 +102,5 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author
+of [Ansible for DevOps](https://www.ansiblefordevops.com/).
