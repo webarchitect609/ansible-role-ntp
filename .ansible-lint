@@ -1,3 +1,6 @@
 skip_list:
   - 'yaml'
   - 'role-name'
+
+mock_roles:
+  - webarchitect609.ntp
